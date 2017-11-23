@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace edtools
-{
-    public class Class1
-    {
+namespace edtools.IDX {
+    public class ParseIDX {
+
     }
 }

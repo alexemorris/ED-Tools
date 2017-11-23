@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>8fab9394-b344-4cbb-ae1d-38bbc0230cad</ProjectGuid>
+    <ProjectGuid>{8FAB9394-B344-4CBB-AE1D-38BBC0230CAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>edtools</RootNamespace>
@@ -30,24 +30,55 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.PowerShell.5.ReferenceAssemblies.1.1.0\lib\net4\System.Management.Automation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Concordance\Cmdlet\ConvertFromConcordance.cs" />
+    <Compile Include="Concordance\Cmdlet\ConvertToConcordance.cs" />
+    <Compile Include="Concordance\Cmdlet\ExportConcordance.cs" />
+    <Compile Include="Concordance\Cmdlet\ImportConcordance.cs" />
+    <Compile Include="Concordance\StringifyConcordance.cs" />
+    <Compile Include="IDX\Cmdlet\ConvertFromIDX.cs" />
+    <Compile Include="IDX\Cmdlet\ConvertToIDX.cs" />
+    <Compile Include="IDX\Cmdlet\ExportIDX.cs" />
+    <Compile Include="IDX\Cmdlet\ImportIDX.cs" />
+    <Compile Include="IDX\StringifyIDX.cs" />
+    <Compile Include="IDX\ParseIDX.cs" />
+    <Compile Include="Concordance\ParseConcordance.cs" />
+    <Compile Include="OPT\Cmdlet\ConvertFromOPT.cs" />
+    <Compile Include="OPT\Cmdlet\ConvertToOPT.cs" />
+    <Compile Include="OPT\Cmdlet\ExportOPT.cs" />
+    <Compile Include="OPT\Cmdlet\ImportOPT.cs" />
+    <Compile Include="OPT\StringifyOPT.cs" />
+    <Compile Include="OPT\ParseOPT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Concordance\Cmdlet\Tests\ConvertFromConcordance.Tests.ps1" />
+    <None Include="Concordance\Cmdlet\Tests\ConvertToConcordance.Tests.ps1" />
+    <None Include="Concordance\Cmdlet\Tests\ExportConcordance.Tests.ps1" />
+    <None Include="Concordance\Cmdlet\Tests\ImportConcordanceTests.ps1" />
+    <None Include="IDX\Cmdlet\Tests\ConvertToIDX.Tests.ps1" />
+    <None Include="IDX\Cmdlet\Tests\ExportIDX.Tests.ps1" />
+    <None Include="IDX\Cmdlet\Tests\ImportIDX.Tests.ps1" />
+    <None Include="IDX\Cmdlet\Tests\ConvertFromIDX.Tests.ps1" />
+    <None Include="OPT\Cmdlet\Tests\ConvertFromOPT.Tests.ps1" />
+    <None Include="OPT\Cmdlet\Tests\ConvertToOPT.Tests.ps1" />
+    <None Include="OPT\Cmdlet\Tests\ExportOPT.Tests.ps1" />
+    <None Include="OPT\Cmdlet\Tests\ImportOPT.Tests.ps1" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>
