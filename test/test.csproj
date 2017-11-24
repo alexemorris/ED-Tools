@@ -48,13 +48,19 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDX.cs" />
-    <Compile Include="OPT.cs" />
-    <Compile Include="Concordance.cs" />
+    <Compile Include="TestIDX.cs" />
+    <Compile Include="TestOPT.cs" />
+    <Compile Include="TestConcordance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="\\Mac\Home\Documents\FCA\projects\active\edtools\edtools\edtools.csproj">
+      <Project>{8fab9394-b344-4cbb-ae1d-38bbc0230cad}</Project>
+      <Name>edtools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

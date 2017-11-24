@@ -56,6 +56,7 @@
     <Compile Include="IDX\StringifyIDX.cs" />
     <Compile Include="IDX\ParseIDX.cs" />
     <Compile Include="Concordance\ParseConcordance.cs" />
+    <Compile Include="OPT\OPTEntry.cs" />
     <Compile Include="OPT\Cmdlet\ConvertFromOPT.cs" />
     <Compile Include="OPT\Cmdlet\ConvertToOPT.cs" />
     <Compile Include="OPT\Cmdlet\ExportOPT.cs" />
