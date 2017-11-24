@@ -6,64 +6,58 @@ using System.Linq;
 namespace edtools.OPT
 {
     public class ParseOPT {
-        StringReader reader;
         bool force;
         char delimiter;
         char? quote;
-        public ParseOPT(StringReader reader, char? quote = null, char delimiter = ',', bool force = false) {
-            this.reader = reader;
+        List<string[]> currentBlock;
+        public ParseOPT(char? quote = null, char delimiter = ',', bool force = false) {
             this.force = force;
             this.quote = quote;
             this.delimiter = delimiter;
+            this.currentBlock = new List<string[]>();
         }
 
-        private OPTEntry parseBlock(List<string[]> inputBlock) {
-            string[] ids = inputBlock.Select(line => line[0]).ToArray();
-            string[] paths = inputBlock.Select(line => line[2]).ToArray();
+        private OPTEntry parseBlock() {
+            if (currentBlock.Count() == 0) return null;
+            string[] ids = currentBlock.Select(line => line[0]).ToArray();
+            string[] paths = currentBlock.Select(line => line[2]).ToArray();
             if (!force) {
                 try {
-                    int count = Int32.Parse(inputBlock[0][6]);
-                    if (count != inputBlock.Count) {
-                        throw new InvalidDataException(String.Format("Page count for block {0} doesn't match what is specified.", inputBlock[0][0]));
+                    int count = Int32.Parse(currentBlock[0][6]);
+                    if (count != currentBlock.Count) {
+                        throw new InvalidDataException(String.Format("Page count for block {0} doesn't match what is specified.", currentBlock[0][0]));
                     }
                 } catch (FormatException) {
-                    throw new InvalidDataException(String.Format("No page count provided for block {0}", inputBlock[0][0]));
+                    throw new InvalidDataException(String.Format("No page count provided for block {0}", currentBlock[0][0]));
                 }
             }
-            
+            currentBlock = new List<string[]>();
             return new OPTEntry(ids, paths);
         }
 
-        private string[] getLine() {
-            if (this.reader.Peek() >= 0) {
-                string[] currentLine = this.reader.ReadLine().Split(this.delimiter).ToArray();
-                if (this.quote.HasValue) {
-                    currentLine = currentLine.Select(col => col.TrimStart(this.quote.Value).TrimEnd(this.quote.Value)).ToArray();
-                }
-                if (currentLine.Length != 7) {
-                    throw new InvalidDataException(String.Format("Column count for block {0} is not 7", currentLine[0]));
-                }
-                return currentLine;
-            } else {
-                return null;
+        private string[] splitLine(string line) {
+            string[] currentLine = line.Split(this.delimiter).ToArray();
+            if (this.quote.HasValue) {
+                currentLine = currentLine.Select(col => col.TrimStart(this.quote.Value).TrimEnd(this.quote.Value)).ToArray();
             }
+            if (currentLine.Length != 7) {
+                throw new InvalidDataException(String.Format("Column count for block {0} is not 7", currentLine[0]));
+            }
+            return currentLine;
         }
 
-        public IEnumerable<OPTEntry> Entries() {
-            List<string[]> currentBlock = new List<string[]>();
-            string[] currentLine = getLine();
-            while (currentLine != null) {
-                do {
-                    currentBlock.Add(currentLine);
-                    currentLine = getLine();
-                    if (currentLine == null) {
-                        break;
-                    }
-                } while (currentLine[3] != "Y");
-                yield return parseBlock(currentBlock);
-                currentBlock = new List<string[]>();
-            }
-            yield break;
+        public OPTEntry readLine(string line) {
+            string[] parsed = splitLine(line);
+            OPTEntry output = null;
+            if (parsed[3] == "Y" && currentBlock.Count != 0) {
+                output = parseBlock();
+            } 
+            currentBlock.Add(parsed);
+            return output;
+        }
+
+        public OPTEntry readEnd() {
+            return parseBlock();
         }
     }
 }

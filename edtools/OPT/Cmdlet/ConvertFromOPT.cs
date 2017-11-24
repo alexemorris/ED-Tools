@@ -1,24 +1,50 @@
 ﻿using System.Management.Automation;
 
 namespace edtools.OPT {
+    [Cmdlet(VerbsData.ConvertFrom, "OPT")]
     class ConvertFromOPT : Cmdlet {
-
-        // Declare the parameters for the cmdlet.
-        [Parameter(Mandatory = true)]
+        [Parameter(Position = 0, ValueFromPipeline = true)]
+        [ValidateNotNullOrEmpty]
         public string InputString {
             get { return inputString; }
             set { inputString = value; }
         }
         private string inputString;
+    
+        [Parameter( Position = 1 )]
+        public char? Quote {
+            get { return quote; }
+            set { quote = value; }
+        }
+        private char? quote = null;
 
-        // Overide the ProcessRecord method to process
-        // the supplied user name and write out a 
-        // greeting to the user by calling the WriteObject
-        // method.
-        protected override void ProcessRecord() {
-            
+        [Parameter(Position = 2)]
+        public char Delimiter {
+            get { return delimiter; }
+            set { delimiter = value; }
+        }
+        private char delimiter = ',';
+
+        private ParseOPT parser;
+        protected override void BeginProcessing() {
+            base.BeginProcessing();
+            parser = new ParseOPT();
         }
 
+        protected override void ProcessRecord() {
+            base.ProcessRecord();
+            OPTEntry output = parser.readLine(inputString);
+            if (output != null) {
+                WriteObject(output);
+            }
+        }
 
+        protected override void EndProcessing() {
+            base.EndProcessing();
+            OPTEntry output = parser.readEnd();
+            if (output != null) {
+                WriteObject(output);
+            }
+        }
     }
 }
