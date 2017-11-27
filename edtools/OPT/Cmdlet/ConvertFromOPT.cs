@@ -2,9 +2,8 @@
 
 namespace edtools.OPT {
     [Cmdlet(VerbsData.ConvertFrom, "OPT")]
-    class ConvertFromOPT : Cmdlet {
+    public class ConvertFromOPT : Cmdlet {
         [Parameter(Position = 0, ValueFromPipeline = true)]
-        [ValidateNotNullOrEmpty]
         public string InputString {
             get { return inputString; }
             set { inputString = value; }
@@ -33,7 +32,7 @@ namespace edtools.OPT {
 
         protected override void ProcessRecord() {
             base.ProcessRecord();
-            OPTEntry output = parser.readLine(inputString);
+            OPTDocument output = parser.ReadLine(inputString);
             if (output != null) {
                 WriteObject(output);
             }
@@ -41,7 +40,7 @@ namespace edtools.OPT {
 
         protected override void EndProcessing() {
             base.EndProcessing();
-            OPTEntry output = parser.readEnd();
+            OPTDocument output = parser.ReadEnd();
             if (output != null) {
                 WriteObject(output);
             }

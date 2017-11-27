@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="TestIDX.cs" />
     <Compile Include="TestOPT.cs" />
-    <Compile Include="TestConcordance.cs" />
+    <Compile Include="TestDelimited.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

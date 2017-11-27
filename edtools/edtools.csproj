@@ -44,32 +44,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concordance\Cmdlet\ConvertFromConcordance.cs" />
-    <Compile Include="Concordance\Cmdlet\ConvertToConcordance.cs" />
-    <Compile Include="Concordance\Cmdlet\ExportConcordance.cs" />
-    <Compile Include="Concordance\Cmdlet\ImportConcordance.cs" />
-    <Compile Include="Concordance\StringifyConcordance.cs" />
+    <Compile Include="Delimited\Cmdlet\ConvertFromConcordance.cs" />
+    <Compile Include="Delimited\Cmdlet\ConvertToConcordance.cs" />
+    <Compile Include="Delimited\Cmdlet\ExportConcordance.cs" />
+    <Compile Include="Delimited\Cmdlet\ImportConcordance.cs" />
+    <Compile Include="Delimited\StringifyDelimited.cs" />
     <Compile Include="IDX\Cmdlet\ConvertFromIDX.cs" />
     <Compile Include="IDX\Cmdlet\ConvertToIDX.cs" />
     <Compile Include="IDX\Cmdlet\ExportIDX.cs" />
     <Compile Include="IDX\Cmdlet\ImportIDX.cs" />
     <Compile Include="IDX\StringifyIDX.cs" />
     <Compile Include="IDX\ParseIDX.cs" />
-    <Compile Include="Concordance\ParseConcordance.cs" />
-    <Compile Include="OPT\OPTEntry.cs" />
+    <Compile Include="Delimited\ParseDelimited.cs" />
+    <Compile Include="OPT\OPTPage.cs" />
+    <Compile Include="OPT\OPTDocument.cs" />
     <Compile Include="OPT\Cmdlet\ConvertFromOPT.cs" />
     <Compile Include="OPT\Cmdlet\ConvertToOPT.cs" />
     <Compile Include="OPT\Cmdlet\ExportOPT.cs" />
     <Compile Include="OPT\Cmdlet\ImportOPT.cs" />
-    <Compile Include="OPT\StringifyOPT.cs" />
     <Compile Include="OPT\ParseOPT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\TypeConversion.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Concordance\Cmdlet\Tests\ConvertFromConcordance.Tests.ps1" />
-    <None Include="Concordance\Cmdlet\Tests\ConvertToConcordance.Tests.ps1" />
-    <None Include="Concordance\Cmdlet\Tests\ExportConcordance.Tests.ps1" />
-    <None Include="Concordance\Cmdlet\Tests\ImportConcordanceTests.ps1" />
+    <None Include="Delimited\Cmdlet\Tests\ConvertFromConcordance.Tests.ps1" />
+    <None Include="Delimited\Cmdlet\Tests\ConvertToConcordance.Tests.ps1" />
+    <None Include="Delimited\Cmdlet\Tests\ExportConcordance.Tests.ps1" />
+    <None Include="Delimited\Cmdlet\Tests\ImportConcordanceTests.ps1" />
     <None Include="IDX\Cmdlet\Tests\ConvertToIDX.Tests.ps1" />
     <None Include="IDX\Cmdlet\Tests\ExportIDX.Tests.ps1" />
     <None Include="IDX\Cmdlet\Tests\ImportIDX.Tests.ps1" />
