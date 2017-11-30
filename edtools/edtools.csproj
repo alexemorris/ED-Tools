@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PsUtils">
+      <HintPath>..\..\..\archived\psutils\bin\Release\PsUtils\PsUtils.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -50,10 +53,7 @@
     <Compile Include="Delimited\Cmdlet\ImportConcordance.cs" />
     <Compile Include="Delimited\StringifyDelimited.cs" />
     <Compile Include="IDX\Cmdlet\ConvertFromIDX.cs" />
-    <Compile Include="IDX\Cmdlet\ConvertToIDX.cs" />
-    <Compile Include="IDX\Cmdlet\ExportIDX.cs" />
     <Compile Include="IDX\Cmdlet\ImportIDX.cs" />
-    <Compile Include="IDX\StringifyIDX.cs" />
     <Compile Include="IDX\ParseIDX.cs" />
     <Compile Include="Delimited\ParseDelimited.cs" />
     <Compile Include="OPT\OPTPage.cs" />

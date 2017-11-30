@@ -9,17 +9,26 @@ namespace edtools.Delimited
         char delimiter;
         char? quote;
         string[] header;
-        int lineNumber;
+        int lineNumber = 0;
         public StringifyDelimited(string[] header = null, char? quote = '\u00FE', char delimiter = '\u0014', bool force = false) {
             this.force = force;
             this.quote = quote;
             this.delimiter = delimiter;
-            this.lineNumber = 0;
             this.header = header;
         }
 
-        public string[] GetHeader() {
-            return this.header;
+        public int LineNumber { get => lineNumber; set => lineNumber = value; }
+
+        public string GetHeader() {
+            return ProcessLine(this.header);
+        }
+
+        public string ProcessLine(string[] input) {
+            string[] values = input;
+            if (quote.HasValue) {
+                values = values.Select(x => quote.Value.ToString() + x + quote.Value.ToString()).ToArray();
+            }
+            return String.Join(delimiter.ToString(), values.ToArray());
         }
 
         public string ReadLine(Dictionary<string, object> inputDict) {
@@ -29,15 +38,15 @@ namespace edtools.Delimited
 
             List<string> values = new List<string>();
             foreach (string column in this.header) {
-                object val = "";
-                inputDict.TryGetValue(column, out val);
+                object val;
+                if (!inputDict.TryGetValue(column, out val)) {
+                    val = "";
+                }
                 values.Add(val.ToString());
             }
 
-            if (quote.HasValue) {
-                values = values.Select(x => quote.Value.ToString() + x + quote.Value.ToString()).ToList();
-            }
-            return String.Join(delimiter.ToString(), values.ToArray());
+            LineNumber++;
+            return ProcessLine(values.ToArray());
         }
     }
 }

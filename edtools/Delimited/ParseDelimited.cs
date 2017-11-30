@@ -22,6 +22,7 @@ namespace edtools.Delimited
         }
 
         public string[] SplitLine(string line) {
+
             string[] currentLine = line.Split(this.delimiter).ToArray();
             if (this.quote.HasValue) {
                 currentLine = currentLine.Select(col => col.TrimStart(this.quote.Value).TrimEnd(this.quote.Value)).ToArray();
@@ -58,7 +59,7 @@ namespace edtools.Delimited
             Dictionary<string, object> output = new Dictionary<string, object>();
 
             if (String.IsNullOrWhiteSpace(line)) {
-                throw new InvalidDataException(String.Format("Entry at line {0} is empty. Ignoring line.", lineNumber));
+                throw new InvalidDataException(String.Format("Entry at line {0} is empty", lineNumber));
             }
 
             string[] inputLine = SplitLine(line);
@@ -76,6 +77,7 @@ namespace edtools.Delimited
             for (int i = 0; i < this.header.Length; i++) {
                 output.Add(this.header[i], inputLine[i]);
             }
+            lineNumber++;
             return output;
         }
     }

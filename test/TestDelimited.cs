@@ -60,6 +60,19 @@ namespace edtools.test.Concordance {
         }
 
         [TestMethod]
+        public void ReadsEntriesSuccessfullyCustomQuote() {
+            StringReader reader = new StringReader("'0','1','2'\n'3','4','5'");
+            ParseDelimited parser = new ParseDelimited(header: new string[] { "a", "b", "c" }, delimiter: ',', quote: '\'');
+            List<Dictionary<string, object>> entries = new List<Dictionary<string, object>>();
+            while (reader.Peek() >= 0) {
+                entries.Add(parser.ReadLine(reader.ReadLine()));
+            }
+            string[] expected = { "0", "3" };
+            string[] actual = entries.Select(row => row["a"].ToString()).ToArray();
+            CollectionAssert.AreEqual(expected, actual, "Not parsed out correct columns for multirow concordance");
+        }
+
+        [TestMethod]
         public void ReadsEntriesSuccessfullyDuplicateHeader() {
             StringReader reader = new StringReader("þ0þ,þ1þ,þ2þ,þ3þ\nþ4þ,þ5þ,þ6þ,þ7þ");
             ParseDelimited parser = new ParseDelimited(header: new string[] { "a", "b", "c", "a" }, delimiter: ',');

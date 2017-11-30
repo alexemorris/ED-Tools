@@ -4,6 +4,7 @@ namespace edtools.OPT {
     public class OPTPage {
         public string ID { get; set; }
         public string Path { get; set; }
+        public string FullPath { get; set; }
         public string Volume { get; set; }
         public bool First { get; set; }
 

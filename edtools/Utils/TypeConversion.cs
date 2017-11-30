@@ -15,5 +15,8 @@ namespace edtools.Utils {
         public static Dictionary<string, object> PSObjectToDict(PSObject inputObj) {
             return inputObj.Properties.Where(p => (p.MemberType == PSMemberTypes.NoteProperty || p.MemberType == PSMemberTypes.AliasProperty) && p.Value != null).ToDictionary(p => p.Name, p => p.Value);
         }
+
+
+
     }
 }
