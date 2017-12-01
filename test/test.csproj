@@ -48,6 +48,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StructuredLoad\Formatter.cs" />
+    <Compile Include="StructuredLoad\Transformation.cs" />
+    <Compile Include="StructuredLoad\FullMapping.cs" />
+    <Compile Include="StructuredLoad\Mapping.cs" />
     <Compile Include="TestIDX.cs" />
     <Compile Include="TestOPT.cs" />
     <Compile Include="TestDelimited.cs" />
@@ -61,6 +65,9 @@
       <Project>{8fab9394-b344-4cbb-ae1d-38bbc0230cad}</Project>
       <Name>edtools</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="StructuredLoad\Data\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

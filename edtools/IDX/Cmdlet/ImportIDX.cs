@@ -90,7 +90,6 @@ namespace edtools.IDX {
                         System.Threading.Thread.Yield();
                     }
                  }
-
             }
         }
 
