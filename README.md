@@ -1,5 +1,5 @@
 # ED-Tools
-Some incredibly useful parsers for importing, remapping and exporting various common datatypes in the eDiscovery Sector (Concordance, Opticon, IDX). Includes various C# Powershell Cmdlets. 
+Some incredibly useful parsers for importing, remapping and exporting various common datatypes in the eDiscovery workflows (Concordance, Opticon, IDX). Includes various C# Powershell Cmdlets. 
 
 https://www.sec.gov/divisions/enforce/datadeliverystandards.pdf
 
