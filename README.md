@@ -17,11 +17,9 @@ https://www.sec.gov/divisions/enforce/datadeliverystandards.pdf
   * ConvertFrom-OPT
   * ConvertTo-OPT
 
-* IDX Data*
+* IDX Data
   * Import-IDX 
   * ConvertFrom-IDX 
-
-*IDX data is very specific to Autonomy / IDOL eDiscovery platforms. May move these features to separate library.
 
 
 ## Remapping
