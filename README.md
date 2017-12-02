@@ -6,22 +6,22 @@ https://www.sec.gov/divisions/enforce/datadeliverystandards.pdf
 
 ## Parsers
 * Concordance Data
-1. Import-Concordance 
-2. Export-Concordance 
-3. ConvertFrom-Concordance
-4. ConvertTo-Concordance
+*    Import-Concordance 
+*    Export-Concordance 
+*    ConvertFrom-Concordance
+*    ConvertTo-Concordance
 
 * Opticon Data
-1. Import-OPT 
-2. Export-OPT 
-3. ConvertFrom-OPT
-4. ConvertTo-OPT
+*    Import-OPT 
+*    Export-OPT 
+*    ConvertFrom-OPT
+*    ConvertTo-OPT
 
 * IDX Data*
-1. Import-IDX 
-2. ConvertFrom-IDX 
+*    Import-IDX 
+*    ConvertFrom-IDX 
 
-* IDX data is very specific to Autonomy / IDOL eDiscovery platforms. May move these features to separate library.
+*IDX data is very specific to Autonomy / IDOL eDiscovery platforms. May move these features to separate library.
 
 
 ## Remapping
