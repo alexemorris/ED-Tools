@@ -2,7 +2,7 @@
 using System.Linq;
 using System;
 using System.Security.Cryptography;
-
+using System.Text;
 namespace edtools.Remap.Transformation {
     public abstract class BaseTransformation {
         public virtual object TransformInputObject(object inputObject) {
@@ -55,6 +55,16 @@ namespace edtools.Remap.Transformation {
                 case "md5":
                 default:
                     return new MD5CryptoServiceProvider();
+            };
+        }
+
+        public static Encoding GetEncoding(string encoding) {
+            switch (encoding.ToLower()) {
+                case "ascii":
+                    return Encoding.ASCII;
+                case "utf8":
+                default:
+                    return Encoding.UTF8;
             };
         }
     }

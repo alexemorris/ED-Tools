@@ -69,6 +69,7 @@
     <Compile Include="Remap\Cmdlet\NewStructuredLoad.cs" />
     <Compile Include="Remap\Transformation\ConvertFromDateTransformation.cs" />
     <Compile Include="Remap\Transformation\SearchStringTransformation.cs" />
+    <Compile Include="Remap\Transformation\FileInfoTransformation.cs" />
     <Compile Include="Remap\Transformation\SplitStringTransformation.cs" />
     <Compile Include="Remap\Transformation\ConvertToStringTransformation.cs" />
     <Compile Include="Remap\Transformation\FindReplaceTransformation.cs" />
@@ -78,15 +79,17 @@
     <Compile Include="Remap\Mapping\DirectMapping.cs" />
     <Compile Include="Remap\Mapping\ScriptMapping.cs" />
     <Compile Include="Remap\FullMapping.cs" />
-    <Compile Include="Remap\StructuredLoad.cs" />
+    <Compile Include="StructuredLoad\StructuredLoad.cs" />
     <Compile Include="Remap\Mapping\BaseMapping.cs" />
-    <Compile Include="Remap\StructuredLoadNode.cs" />
     <Compile Include="Remap\SingleMapping.cs" />
     <Compile Include="Remap\Transformation\HashStringTransformation.cs" />
     <Compile Include="Remap\Transformation\HashFileTransformation.cs" />
     <Compile Include="Remap\Transformation\ScriptTransformation.cs" />
     <Compile Include="Remap\Transformation\ReadFileTransformation.cs" />
     <Compile Include="Remap\Transformation\BaseTransformation.cs" />
+    <Compile Include="StructuredLoad\StructuredLoadEmail.cs" />
+    <Compile Include="StructuredLoad\StructuredLoadFile.cs" />
+    <Compile Include="StructuredLoad\StructuredLoadNode.cs" />
     <Compile Include="Utils\TypeConversion.cs" />
   </ItemGroup>
   <ItemGroup>
