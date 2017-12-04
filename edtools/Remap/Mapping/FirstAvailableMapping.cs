@@ -7,17 +7,23 @@ namespace edtools.Remap.Mapping {
             this.fieldNames = fieldNames;
         }
 
-        public override string GetValue(Dictionary<string, object> inputRow) {
+        public override object GetValue(Dictionary<string, object> inputRow) {
             object output;
             foreach (string fieldName in fieldNames) {
                 if (inputRow.TryGetValue(fieldName, out output)) {
-                    string trimmed = output.ToString().Trim();
-                    if (trimmed != "") {
-                        return trimmed;
+                    string stringRep = output as string;
+                    if (stringRep != null) {
+                        string trimmed = stringRep.Trim();
+                        if (trimmed != "") {
+                            return trimmed;
+                        } else {
+                            return null;
+                        }
                     }
+                    return output;
                 }
             }
-            return "";
+            return null;
         }
     }
 }

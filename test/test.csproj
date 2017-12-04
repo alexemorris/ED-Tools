@@ -48,7 +48,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StructuredLoad\Formatter.cs" />
     <Compile Include="StructuredLoad\Transformation.cs" />
     <Compile Include="StructuredLoad\FullMapping.cs" />
     <Compile Include="StructuredLoad\Mapping.cs" />

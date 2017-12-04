@@ -9,8 +9,9 @@ namespace edtools.Remap.Transformation {
             this.algorithm = GetHashAlgorithm(algorithm);
         }
 
-        public override string TransformValue(string inputValue) {
-            byte[] hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputValue));
+        public override object TransformSingleObject(object inputObject) {
+            string inputString = CheckType<string>(inputObject);
+            byte[] hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
             return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
         }
     }

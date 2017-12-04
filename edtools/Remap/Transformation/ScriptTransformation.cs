@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace edtools.Remap.Transformation {
@@ -14,12 +15,18 @@ namespace edtools.Remap.Transformation {
             runspace.Open();
         }
 
-        public override string TransformValue(string inputValue) {
-            runspace.SessionStateProxy.SetVariable("InputValue", inputValue);
+        public override object TransformSingleObject(object inputObject) {
+            runspace.SessionStateProxy.SetVariable("inputValue", inputObject);
             Pipeline pipeline = runspace.CreatePipeline();
             pipeline.Commands.AddScript(script);
-            Collection<PSObject> PSOutput = pipeline.Invoke();
-            return PSOutput.ToList()[0].ToString();
+
+            List<PSObject> PSOutput = pipeline.Invoke().ToList();
+            if (PSOutput.Count() == 1) {
+                return PSOutput[0].BaseObject;
+            } else {
+                return PSOutput.Select(x => x.BaseObject);
+            }
+
         }
     }
 }

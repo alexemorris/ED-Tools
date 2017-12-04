@@ -11,12 +11,13 @@ namespace edtools.Remap.Transformation {
             this.ignoreMissing = ignoreMissing;
         }
 
-        public override string TransformValue(string inputValue) {
+        public override object TransformSingleObject(object inputObject) {
+            string inputString = CheckType<string>(inputObject);
             try {
-                return File.ReadAllText(inputValue, fileEncoding);
+                return File.ReadAllText(inputString, fileEncoding);
             } catch (FileNotFoundException) {
                 if (!ignoreMissing) {
-                    throw new FileNotFoundException(String.Format("Could not find file {0}", inputValue));
+                    throw new FileNotFoundException(String.Format("Could not find file {0}", inputString));
                 }
                 return "";
             }

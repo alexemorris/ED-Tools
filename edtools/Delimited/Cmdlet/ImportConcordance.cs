@@ -3,6 +3,7 @@ using Microsoft.PowerShell.Commands;
 using System.Collections.Generic;
 using System.IO;
 using edtools.Utils;
+using edtools.Remap;
 using PsUtils;
 
 namespace edtools.Delimited {
@@ -24,12 +25,19 @@ namespace edtools.Delimited {
         }
         private FileSystemCmdletProviderEncoding psEncoding = FileSystemCmdletProviderEncoding.Default;
 
-        [Parameter()]
+        [Parameter(Mandatory = false)]
         public string[] Header {
             get { return header; }
             set { header = value; }
         }
         private string[] header = null;
+
+        [Parameter(Mandatory = false)]
+        public FullMapping Mapping {
+            get { return mapping; }
+            set { mapping = value; }
+        }
+        private FullMapping mapping = null;
 
         [Parameter()]
         public char? Quote {
@@ -71,6 +79,9 @@ namespace edtools.Delimited {
             while ((line = reader.ReadLine()) != null) {
                 try {
                     Dictionary<string, object> output = parser.ReadLine(line);
+                    if (Mapping != null) {
+                        output = Mapping.GetRow(output);
+                    }
                     WriteObject(TypeConversion.DictToPSObject(output));
                 } catch (InvalidDataException err) {
                     WriteWarning(err.Message);

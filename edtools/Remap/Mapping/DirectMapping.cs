@@ -7,12 +7,12 @@ namespace edtools.Remap.Mapping {
             this.fieldName = fieldName;
         }
 
-        public override string GetValue(Dictionary<string, object> inputRow) {
+        public override object GetValue(Dictionary<string, object> inputRow) {
             object output;
             if (!inputRow.TryGetValue(this.fieldName, out output)) {
                 output = "";
             }
-            return output.ToString();
+            return output;
         }
 
     }

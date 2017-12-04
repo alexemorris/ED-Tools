@@ -12,15 +12,16 @@ namespace edtools.Remap.Transformation {
             this.ignoreMissing = ignoreMissing;
         }
 
-        public override string TransformValue(string inputValue) {
+        public override object TransformSingleObject(object inputObject) {
+            string inputString = CheckType<string>(inputObject);
             try {
-                using (var stream = File.OpenRead(inputValue)) {
+                using (var stream = File.OpenRead(inputString)) {
                     byte[] hash = algorithm.ComputeHash(stream);
                     return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
                 }
             } catch (FileNotFoundException) {
                 if (!ignoreMissing) {
-                    throw new FileNotFoundException(String.Format("Could not find file {0}", inputValue));
+                    throw new FileNotFoundException(String.Format("Could not find file {0}", inputString));
                 }
                 return "";
             }
