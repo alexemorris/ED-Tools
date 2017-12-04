@@ -20,14 +20,18 @@ namespace edtools.StructuredLoad {
         public Dictionary<string, object> Fields { get; set; }
 
         public StructuredLoadNode(Dictionary<string, object> entry) {
+
+            this.Fields = entry;
             this.ID = (string)entry["ID"];
             this.BatesRange = new Tuple<string, string>((string)entry["Bates Begin"], (string)entry["Bates End"]);
             this.AttachRange = new Tuple<string, string>((string)entry["Attach Begin"], (string)entry["Attach End"]);
             this.NativeInfo = (FileInfo)entry["Native Info"];
             this.TextInfo = (FileInfo)entry["Text Info"];
+
             object imageInfo = null;
             entry.TryGetValue("Image Info", out imageInfo);
             this.ImageInfo = (FileInfo)imageInfo;
+
             this.NativeInfo = (FileInfo)entry["Native Link"];
             this.TextInfo = (FileInfo)entry["Text Link"];
 

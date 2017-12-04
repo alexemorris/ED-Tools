@@ -27,9 +27,7 @@ namespace edtools.StructuredLoad {
                 }
                 nodeHash.Add(ID, node);
 
-                if (!parentHash.ContainsKey(ID)) {
-                    parentHash.Add(ID, new List<StructuredLoadNode>());
-                }
+                if (!parentHash.ContainsKey(ID)) { parentHash.Add(ID, new List<StructuredLoadNode>());  }
 
                 string parent = (string)entry["Parent"];
                 if (parent != null) {

@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Remap\Cmdlet\NewStructuredLoad.cs" />
     <Compile Include="Remap\Transformation\ConvertFromDateTransformation.cs" />
+    <Compile Include="Remap\Transformation\MailAddressTransformation.cs" />
     <Compile Include="Remap\Transformation\SearchStringTransformation.cs" />
     <Compile Include="Remap\Transformation\FileInfoTransformation.cs" />
     <Compile Include="Remap\Transformation\SplitStringTransformation.cs" />
