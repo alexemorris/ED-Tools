@@ -3,7 +3,7 @@
 namespace edtools.Remap.Mapping {
     public class FirstAvailableMapping : BaseMapping {
         string[] fieldNames;
-        public FirstAvailableMapping(string[] fieldNames) {
+        public FirstAvailableMapping(string[] fieldNames, bool checkOutput = false) {
             this.fieldNames = fieldNames;
         }
 
