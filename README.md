@@ -24,11 +24,11 @@ Once up and running you can build the solution using the flag,  you can then use
   Import-IDX "big.idx" -Parallel
 ```
 
-## Packaging full release module
+## Packaging for a release
 In the future this should be automated. But its a 3 step process.
 1. Build the solution using Release configuration
-2. Create a *copy* of the 'powershell' directory in the root of the repository
-3. Set the relevant version in the .psd1 file
+2. Create a *copy* of the 'ED-Tools' directory in the root of the repository somewhere locally
+3. Set the relevant version in the new .psd1 file
 4. You're good to go!
 
 ## Parsers
