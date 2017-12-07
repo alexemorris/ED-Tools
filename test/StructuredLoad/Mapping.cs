@@ -2,9 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using edtools.Remap.Mapping;
 using System.Linq;
-namespace edtools.test.StructuredLoad {
+namespace edtools.test.Remap {
     [TestClass]
-    public class StructuredLoadMappingTests {
+    public class RemapMappingTests {
         [TestMethod]
         public void DirectMappingWorksCorrectly() {
             DirectMapping direct = new DirectMapping("X");

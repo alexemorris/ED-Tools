@@ -3,7 +3,7 @@ using System.Management.Automation;
 using System.Linq;
 
 namespace edtools.Utils {
-    class TypeConversion {
+    public class TypeConversion {
         public static PSObject DictToPSObject(Dictionary<string, object> inputDict) {
             PSObject output = new PSObject();
             foreach (KeyValuePair<string, object> entry in inputDict) {

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StructuredLoad\FullMapping.cs" />
+    <Compile Include="StructuredLoad\StructuredLoadNode.cs" />
     <Compile Include="StructuredLoad\Transformation.cs" />
     <Compile Include="StructuredLoad\SingleMapping.cs" />
     <Compile Include="StructuredLoad\Mapping.cs" />

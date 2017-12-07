@@ -5,7 +5,7 @@ using edtools.Remap.Transformation;
 using System;
 namespace edtools.test.Remap {
     [TestClass]
-    public class StructuredLoadTransformationTests {
+    public class RemapTransformationTests {
         [TestMethod]
         public void HashStringTransformationWorks() {
             HashStringTransformation transformation = new HashStringTransformation("Md5");
@@ -21,10 +21,8 @@ namespace edtools.test.Remap {
             string input = "test112test";
             string expected = "test2test";
             object actual = transformation.TransformInputObject(new string[] { input });
-
             Assert.AreEqual(expected, actual, "Hash string transformation didn't get the correct value");
         }
-
 
         [TestMethod]
         public void ConvertToDateTransformationWorks() {

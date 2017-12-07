@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 namespace edtools.StructuredLoad {
-    class StructuredLoad {
+    public class StructuredLoad {
         public List<StructuredLoadNode> Entries { get; set; }
 
         public StructuredLoad(List<Dictionary<string, object>> inputData, OPTDocument[] opts = null) {
@@ -19,12 +19,12 @@ namespace edtools.StructuredLoad {
             foreach (Dictionary<string, object> entry in inputData) {
                 string ID = (string)entry["ID"];
                 optHash.TryGetValue(ID, out OPTDocument opt);
-                StructuredLoadNode node;
-                if ((bool)entry["Is Email"]) {
-                    node = new StructuredLoadEmail(entry);
-                } else {
-                    node = new StructuredLoadFile(entry);
-                }
+                StructuredLoadNode node = new StructuredLoadNode(entry);
+               // if ((bool)entry["Is Email"]) {
+               //     node = new StructuredLoadEmail(entry);
+               // } else {
+               //     node = new StructuredLoadFile(entry);
+               // }
                 nodeHash.Add(ID, node);
 
                 if (!parentHash.ContainsKey(ID)) { parentHash.Add(ID, new List<StructuredLoadNode>());  }

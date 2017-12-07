@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using edtools.OPT;
 
 namespace edtools.StructuredLoad {
-    public abstract class StructuredLoadNode { 
+    public class StructuredLoadNode { 
         public string ID { get; set; }
         public Tuple<string, string> BatesRange { get; set; }
         public Tuple<string, string> AttachRange { get; set; }
@@ -25,20 +25,17 @@ namespace edtools.StructuredLoad {
             this.ID = (string)entry["ID"];
             this.BatesRange = new Tuple<string, string>((string)entry["Bates Begin"], (string)entry["Bates End"]);
             this.AttachRange = new Tuple<string, string>((string)entry["Attach Begin"], (string)entry["Attach End"]);
-            this.NativeInfo = (FileInfo)entry["Native Info"];
-            this.TextInfo = (FileInfo)entry["Text Info"];
 
-            object imageInfo = null;
-            entry.TryGetValue("Image Info", out imageInfo);
-            this.ImageInfo = (FileInfo)imageInfo;
+            if (entry.TryGetValue("Image Info", out object imageInfo)) {
+                this.ImageInfo = (FileInfo)imageInfo;
+            }
 
             this.NativeInfo = (FileInfo)entry["Native Link"];
             this.TextInfo = (FileInfo)entry["Text Link"];
 
-            object printed = null;
-            entry.TryGetValue("Printed Date", out printed);
-            this.PrintedDate = (DateTime)printed;
-
+            if (entry.TryGetValue("Printed Date", out object printed)) {
+                this.PrintedDate = (DateTime)printed;
+            }          
         }
     }
 }

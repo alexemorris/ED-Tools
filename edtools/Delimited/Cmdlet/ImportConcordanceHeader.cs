@@ -9,8 +9,8 @@ using System.Text;
 using System;
 
 namespace edtools.Delimited {
-    [Cmdlet(VerbsData.Import, "Concordance")]
-    public class ImportConcordance : Cmdlet {
+    [Cmdlet(VerbsData.Import, "ConcordanceHeader")]
+    public class ImportConcordanceHeader : Cmdlet {
         [Parameter(Mandatory = true, Position = 0)]
         [ValidateNotNullOrEmpty]
         public string Path {
@@ -27,56 +27,23 @@ namespace edtools.Delimited {
         }
         private FileSystemCmdletProviderEncoding psEncoding;
 
-        [Parameter(Mandatory = false)]
-        public string[] Header {
-            get { return header; }
-            set { header = value; }
-        }
-        private string[] header = null;
-
-        [Parameter(Mandatory = false)]
-        public FullMapping Mapping {
-            get { return mapping; }
-            set { mapping = value; }
-        }
-        private FullMapping mapping = null;
-
-        [Parameter()]
-        public char Quote {
-            get { return quote; }
-            set { quote = value; }
-        }
-        private char quote = '\u00FE';
-
-        [Parameter()]
-        public char Delimiter {
-            get { return delimiter; }
-            set { delimiter = value; }
-        }
-        private char delimiter = '\u0014';
         private StreamReader reader;
         private Stream stream;
         private ParseDelimited parser;
-        private string currentLine;
+        private string[] header;
 
         private void checkEncoding(System.Text.Encoding encoding) {
             stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             reader = new StreamReader(stream, encoding);
             string firstLine = reader.ReadLine();
             parser.TestLine(firstLine);
-            if (header == null) {
-                parser.ReadHeader(firstLine);
-                currentLine = reader.ReadLine();
-            } else {
-                currentLine = firstLine;
-            }
+            header = parser.ReadHeader(firstLine);
         }
 
         protected override void BeginProcessing() {
             base.BeginProcessing();
-            parser = new ParseDelimited(header: Header, quote: Quote, delimiter: Delimiter);
+            parser = new ParseDelimited();
             WriteVerbose(String.Format("Determining encoding for {0}.", path));
-
             Encoding[] encodings = new System.Text.Encoding[] { CmdletEncoding.Convert(psEncoding), System.Text.Encoding.UTF8, System.Text.Encoding.ASCII, System.Text.Encoding.Default, System.Text.Encoding.UTF32 };
 
             int tried = 0;
@@ -101,18 +68,7 @@ namespace edtools.Delimited {
 
         protected override void ProcessRecord() {
             base.ProcessRecord();
-            while (currentLine != null) {
-                try {
-                    Dictionary<string, object> output = parser.ReadLine(currentLine);
-                    currentLine = reader.ReadLine();
-                    if (Mapping != null) {
-                        output = Mapping.GetRow(output);
-                    }
-                    WriteObject(TypeConversion.DictToPSObject(output));
-                } catch (InvalidDataException err) {
-                    WriteWarning(err.Message);
-                }
-            }          
+            WriteObject(header);          
         }
 
         protected override void EndProcessing() {

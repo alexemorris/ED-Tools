@@ -26,14 +26,23 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\powershell\dll\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Module|AnyCPU'">
+    <OutputPath>bin\Release-Module\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PsUtils">
-      <HintPath>..\..\..\archived\psutils\bin\Release\PsUtils\PsUtils.dll</HintPath>
+      <HintPath>..\references\PsUtils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,6 +61,7 @@
     <Compile Include="Delimited\Cmdlet\ConvertFromConcordance.cs" />
     <Compile Include="Delimited\Cmdlet\ConvertToConcordance.cs" />
     <Compile Include="Delimited\Cmdlet\ExportConcordance.cs" />
+    <Compile Include="Delimited\Cmdlet\ImportConcordanceHeader.cs" />
     <Compile Include="Delimited\Cmdlet\ImportConcordance.cs" />
     <Compile Include="Delimited\StringifyDelimited.cs" />
     <Compile Include="IDX\Cmdlet\ConvertFromIDX.cs" />
@@ -110,4 +120,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>powershell.exe</PreBuildEvent>
+  </PropertyGroup>
 </Project>

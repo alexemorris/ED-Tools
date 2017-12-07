@@ -23,11 +23,11 @@ namespace edtools.Delimited {
         private string[] header = null;
 
         [Parameter()]
-        public char? Quote {
+        public char Quote {
             get { return quote; }
             set { quote = value; }
         }
-        private char? quote = '\u00FE';
+        private char quote = '\u00FE';
 
         [Parameter()]
         public char Delimiter {

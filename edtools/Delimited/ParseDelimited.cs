@@ -8,26 +8,22 @@ namespace edtools.Delimited
     public class ParseDelimited {
         bool force;
         char delimiter;
-        char? quote;
+        char quote;
         string[] header;
         int lineNumber;
-        public ParseDelimited(string[] header = null, char? quote = '\u00FE', char delimiter = '\u0014', bool force = false) {
+        public ParseDelimited(string[] header = null, char quote = '\u00FE', char delimiter = '\u0014', bool force = false) {
             this.force = force;
             this.quote = quote;
             this.delimiter = delimiter;
             if (header != null) {
                 parseHeader(header);
             }
-            this.lineNumber = 0;
+            lineNumber = 0;
         }
 
         public string[] SplitLine(string line) {
-
             string[] currentLine = line.Split(this.delimiter).ToArray();
-            if (this.quote.HasValue) {
-                currentLine = currentLine.Select(col => col.TrimStart(this.quote.Value).TrimEnd(this.quote.Value)).ToArray();
-            }
-            return currentLine;
+            return currentLine.Select(col => col.TrimStart(this.quote).TrimEnd(this.quote)).ToArray();
         }
 
         private void parseHeader(string[] input) {
@@ -41,7 +37,17 @@ namespace edtools.Delimited
             header = input;
         }
 
+        public void TestLine(string line) {
+            if (CharCount(line, this.quote) == 0) {
+                throw new InvalidDataException(String.Format("No quotes found in input data"));
+            }
+            if (CharCount(line, this.delimiter) == 0) {
+                throw new InvalidDataException(String.Format("No separators found in input data"));
+            }
+        }
+
         public string[] ReadHeader(string line) {
+            TestLine(line);
             lineNumber++;
             string[] header = SplitLine(line);
             parseHeader(header);
@@ -49,13 +55,18 @@ namespace edtools.Delimited
         }
 
         public string[] GetHeader() {
-            return this.header;
+            return header;
+        }
+
+        public int CharCount(string input, char check) {
+            return input.ToCharArray().Where(c => c == this.quote).Count();
         }
 
         public Dictionary<string, object> ReadLine(string line) {
-            if (this.header == null) {
+            if (header == null) {
                 throw new ArgumentException("No header provided, cannot parse concordance data");
             }
+
             Dictionary<string, object> output = new Dictionary<string, object>();
 
             if (String.IsNullOrWhiteSpace(line)) {
@@ -68,17 +79,20 @@ namespace edtools.Delimited
                 throw new InvalidDataException(String.Format("Entry at line {0} has {1} columns (expected {2}). Ignoring line.", lineNumber, inputLine.Length, header.Length));
             }
 
-            int quotes = line.Length - line.Replace(quote.ToString(), String.Empty).Length;
+            int quotes = CharCount(line, quote);
 
-            if (quotes != header.Length * 2) {
+            if (quotes > header.Length * 2) {
                 throw new InvalidDataException(String.Format("Entry at line {0} has additional quote chars ({1}) (found {2}, expected {3}). Ignoring line.", lineNumber, quote, quotes, header.Length * 2));
+            }
+            if (quotes < header.Length * 2) {
+                throw new InvalidDataException(String.Format("Entry at line {0} has missing quote chars ({1}) (found {2}, expected {3}). Ignoring line.", lineNumber, quote, quotes, header.Length * 2));
             }
 
             for (int i = 0; i < this.header.Length; i++) {
                 output.Add(this.header[i], inputLine[i]);
             }
-            lineNumber++;
-            return output;
+
+            lineNumber++; return output;
         }
     }
 }

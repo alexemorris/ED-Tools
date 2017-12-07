@@ -4,9 +4,9 @@ using edtools.Remap;
 using edtools.Remap.Mapping;
 using edtools.Remap.Transformation;
 
-namespace edtools.test.StructuredLoad {
+namespace edtools.test.Remap {
     [TestClass]
-    public class StructuredLoadFullMappingTests {
+    public class RemapFullMappingTests {
         [TestMethod]
         public void FullMappingWorks() {
             DirectMapping mapper = new DirectMapping("Y");
