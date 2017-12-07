@@ -31,61 +31,6 @@ In the future this should be automated. But its a 3 step process.
 3. Set the relevant version in the .psd1 file
 4. You're good to go!
 
-## Cmdlets
-* Concordance Data
-  * Import-Concordance
-  * Import-ConcordanceHeader
-  * Export-Concordance
-  * ConvertFrom-Concordance
-  * ConvertTo-Concordance
-
-* Opticon Data
-  * Import-OPT
-  * Export-OPT
-  * ConvertFrom-OPT
-  * ConvertTo-OPT
-
-* IDX Data
-  * Import-IDX
-  * ConvertFrom-IDX
-
-
-## Remapping
-*Still in development!*
-.NET classes and corresponding Cmdlets that can remap input data columns, parse dates, delimited fields and email data.
-# ED-Tools
-Some incredibly useful parsers for importing, remapping and exporting various common datatypes in eDiscovery workflows (Concordance, Opticon, IDX). Includes various C# Powershell Cmdlets.
-
-https://www.sec.gov/divisions/enforce/datadeliverystandards.pdf
-
-
-## Installation instructions
-Open the solution in a recent version of Visual Studio (developed on VS2017 Community). Ensure references are configured correctly. Currently there are 2 dependencies.
-
-- System.Management.Automation - which is required for Powershell integration, the latest version of which can be acquired from NuGet.
-
-- PSUtils - binary is included and includes some handy helper functions for splitting streams and converting Encoding from a Powershell enum to a System.Text.Encoding object.
-Source code in the following repo:
-https://github.com/antonyoni/PsUtils
-
-
-Once up and running you can build the solution using the flag,  you can then use the output dll in directly powershell via some handy cmdlet wrappers.
-
-```powershell
-  Import-Module edtools.dll
-  Import-Concordance "file.dat" -Verbose
-  Get-Content "file.dat" | ConvertFrom-Concordance
-  Import-OPT "images.opt"
-  Import-IDX "big.idx" -Parallel
-```
-
-## Packaging full release module
-In the future this should be automated. But its a 3 step process.
-1. Build the solution using Release configuration
-2. Create a *copy* of the 'powershell' directory in the root of the repository
-3. Set the relevant version in the .psd1 file
-4. You're good to go!
-
 ## Parsers
 * Concordance Data
   * Import-Concordance
