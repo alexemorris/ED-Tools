@@ -1,0 +1,291 @@
+[
+  {
+    "name": "ID",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "DOCID"
+      }
+    }
+  },
+  {
+    "name": "Parent ID",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "PARENT_DOCID"
+      }
+    }
+  },
+  {
+    "name": "Bates Begin",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "BEGINBATES"
+      }
+    },
+    "transformations": [
+      {
+        "type": "FindReplaceTransformation",
+        "args": {
+          "find": "_\\d+$",
+          "replace": "",
+          "regex": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "Bates End",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "ENDBATES"
+      }
+    },
+    "transformations": [
+      {
+        "type": "FindReplaceTransformation",
+        "args": {
+          "find": "_\\d+$",
+          "replace": "",
+          "regex": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "Attach Begin",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "BEGINGROUP"
+      }
+    }
+  },
+  {
+    "name": "Attach End",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "ENDGROUP"
+      }
+    }
+  },
+  {
+    "name": "Native Link",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "ITEMPATH"
+      }
+    },
+    "transformations": [
+      {
+        "type": "FindReplaceTransformation",
+        "args": {
+          "find": "tempnative\\\\.+\\\\.+\\\\",
+          "replace": "NATIVE\\",
+          "regex": true
+        }
+      },
+      {
+        "type": "FileInfoTransformation",
+        "args": {
+          "root": "\\\\Mac\\Home\\Desktop\\RECC026-142446",
+          "checkExists": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "Text Link",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "TEXTPATH"
+      }
+    },
+    "transformations": [
+      {
+        "type": "FindReplaceTransformation",
+        "args": {
+          "find": "temptext\\\\.+\\\\.+\\\\",
+          "replace": "NATIVE\\",
+          "regex": true
+        }
+      },
+      {
+        "type": "FileInfoTransformation",
+        "args": {
+          "root": "\\\\Mac\\Home\\Desktop\\RECC026-142446",
+          "checkExists": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "Date Document",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "Document Date"
+      }
+    },
+    "transformations": [
+      {
+        "type": "ConvertToDateTransformation",
+        "args": {
+          "format": "yyyy/MM/dd HH:mm:ss"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Date Accessed",
+    "mapping": {
+      "type": "DirectMapping",
+      "merge": "Output",
+      "args": {
+        "fieldName": "Date Document"
+      }
+    }
+  },
+  {
+    "name": "File Path",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "Filename"
+      }
+    }
+  },
+  {
+    "name": "Is Email",
+    "mapping": {
+      "type": "ScriptMapping",
+      "args": {
+        "script": "return $InputValues['Document Type'] -match 'Email'"
+      }
+    }
+  },
+  {
+    "name": "Date Sent",
+    "mapping": {
+      "type": "DirectMapping",
+      "merge": "Output",
+      "args": {
+        "fieldName": "Date Document"
+      }
+    }
+  },
+  {
+    "name": "Date Recieved",
+    "mapping": {
+      "type": "DirectMapping",
+      "merge": "Output",
+      "args": {
+        "fieldName": "Date Document"
+      }
+    }
+  },
+  {
+    "name": "Subject",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "Subject"
+      }
+    }
+  },
+  {
+    "name": "TO",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "Recipient/To"
+      }
+    },
+    "transformations" : [
+      {
+        "type": "SplitStringTransformation",
+        "args": {
+          "separator": ",",
+          "ignoreMissing": true
+        }
+      },
+      {
+        "type": "MailAddressTransformation",
+        "args": {
+          "ignoreInvalid": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "FROM",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "Author/From"
+      }
+    },
+    "transformations" : [
+      {
+        "type": "MailAddressTransformation",
+        "args": {
+          "ignoreInvalid": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "CC",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "Cc"
+      }
+    },
+    "transformations" : [
+      {
+        "type": "SplitStringTransformation",
+        "args": {
+          "separator": ",",
+          "ignoreMissing": true
+        }
+      },
+      {
+        "type": "MailAddressTransformation",
+        "args": {
+          "ignoreInvalid": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "BCC",
+    "mapping": {
+      "type": "DirectMapping",
+      "args": {
+        "fieldName": "Bcc"
+      }
+    },
+    "transformations" : [
+      {
+        "type": "SplitStringTransformation",
+        "args": {
+          "separator": ",",
+          "ignoreMissing": true
+        }
+      },
+      {
+        "type": "MailAddressTransformation",
+        "args": {
+          "ignoreInvalid": true
+        }
+      }
+    ]
+  }
+]

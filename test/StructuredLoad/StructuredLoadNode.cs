@@ -43,11 +43,9 @@ namespace edtools.test.StructuredLoad {
             string suffix = suffixes[random.Next(suffixes.Length)];
             return new MailAddress(to + '@' + domain + suffix);
         }
-
         public List<MailAddress> MockEmails(int min, int max) {
             return Enumerable.Repeat("", random.Next(min, max)).Select(x => MockEmail()).ToList();
         }
-
         public Dictionary<string, object> MockSLEmail(int index = 10) {
             Dictionary<string, object> inputData = MockSLNode(index);
             inputData.Add("TO", MockEmails(0,10));
@@ -81,7 +79,6 @@ namespace edtools.test.StructuredLoad {
 
             return inputData;
         }
-
         [TestMethod]
         public void NodeConstructorWorks() {
             Dictionary<string, object> inputData = MockSLNode(10);
@@ -99,9 +96,9 @@ namespace edtools.test.StructuredLoad {
         [TestMethod]
         public void NodeConstructorWorksWithDatePrinted() {
             Dictionary<string, object> inputData = MockSLNode(7);
-            StructuredLoadNode transformation = new StructuredLoadNode(inputData);
             DateTime printed = RandomDate(2017);
-            inputData.Add("Date Printed", printed);
+            inputData.Add("Printed Date", printed);
+            StructuredLoadNode transformation = new StructuredLoadNode(inputData);
             string actualID = transformation.ID;
             string expectedID = (string)inputData["ID"];
             Assert.AreEqual(expectedID, actualID, "Structured load node constructor didn't get ID correctly");
@@ -119,7 +116,6 @@ namespace edtools.test.StructuredLoad {
             DateTime actualsent = transformation.SentDate;
             DateTime expectedsent = (DateTime)inputData["Sent Date"];
             Assert.AreEqual(expectedsent, actualsent, "Structured load email node constructor didn't get sent date correctly");
-
             MailAddress actualTo = transformation.EmailInfo.To[0];
             MailAddress expectedTo = ((List<MailAddress>)inputData["TO"])[0];
             Assert.AreEqual(expectedTo, actualTo, "Structured load node constructor didn't get to correctly");

@@ -67,20 +67,21 @@ PowerShellVersion = '4.0'
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 NestedModules = @(
+    'Ed-Tools.psm1'
     'dll\edtools.dll'
 )
 
 # Functions to export from this module
-FunctionsToExport = '*'
+# FunctionsToExport = '*'
 
 # Cmdlets to export from this module
-CmdletsToExport = '*'
+# CmdletsToExport = '*'
 
 # Variables to export from this module
-VariablesToExport = '*'
+# VariablesToExport = '*'
 
 # Aliases to export from this module
-AliasesToExport = '*'
+# AliasesToExport = '*'
 
 # List of all modules packaged with this module
 # ModuleList = @()
