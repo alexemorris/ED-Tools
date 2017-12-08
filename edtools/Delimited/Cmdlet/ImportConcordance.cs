@@ -56,7 +56,7 @@ namespace edtools.Delimited {
         private char delimiter = '\u0014';
         private StreamReader reader;
         private Stream stream;
-        private ParseDelimited parser;
+        protected ParseDelimited parser;
         private string currentLine;
 
         private void checkEncoding(System.Text.Encoding encoding) {
@@ -104,7 +104,6 @@ namespace edtools.Delimited {
             while (currentLine != null) {
                 try {
                     Dictionary<string, object> output = parser.ReadLine(currentLine);
-                    currentLine = reader.ReadLine();
                     if (Mapping != null) {
                         output = Mapping.GetRow(output);
                     }
@@ -112,7 +111,8 @@ namespace edtools.Delimited {
                 } catch (InvalidDataException err) {
                     WriteWarning(err.Message);
                 }
-            }          
+                currentLine = reader.ReadLine();
+            }
         }
 
         protected override void EndProcessing() {

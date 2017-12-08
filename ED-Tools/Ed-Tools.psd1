@@ -67,7 +67,7 @@ PowerShellVersion = '4.0'
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 NestedModules = @(
-    'dll\edtools\edtools.dll'
+    'dll\edtools.dll'
 )
 
 # Functions to export from this module

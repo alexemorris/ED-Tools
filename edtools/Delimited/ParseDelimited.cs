@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Text;
 
 namespace edtools.Delimited
 {
@@ -25,6 +26,7 @@ namespace edtools.Delimited
             string[] currentLine = line.Split(this.delimiter).ToArray();
             return currentLine.Select(col => col.TrimStart(this.quote).TrimEnd(this.quote)).ToArray();
         }
+
 
         private void parseHeader(string[] input) {
             var hd = new Dictionary<string, int>();
